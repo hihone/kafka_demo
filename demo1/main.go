@@ -81,7 +81,7 @@ func listenSignal() {
 	ch := make(chan os.Signal, 1)
 	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-ch
-	fmt.Println("接收到信号", sig.String())
+	fmt.Println("接收到信号", sig.String(), "终止消费")
 	if read != nil {
 		_ = read.Close()
 		//if err := read.Close(); err != nil {

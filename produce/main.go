@@ -3,5 +3,5 @@ package main
 import "github.com/hihone/kafka_demo"
 
 func main() {
-	_ = kafka_demo.WriteMessage1()
+	_ = kafka_demo.WriteMessage()
 }

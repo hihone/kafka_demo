@@ -28,7 +28,7 @@ func ReadMessage(read *kafka.Reader) {
 			break
 		}
 
-		fmt.Printf("Topic: %s, Offset: %d, Key: %s, Msg: %s", msg.Topic, msg.Offset, msg.Key, msg.Value)
+		fmt.Printf("Topic: %s, Offset: %d, Key: %s, Msg: %s \n", msg.Topic, msg.Offset, msg.Key, msg.Value)
 	}
 
 }
@@ -36,6 +36,8 @@ func ReadMessage(read *kafka.Reader) {
 func SignalLister(read *kafka.Reader) {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	sig := <-sigChan
+	fmt.Println("接收到信号", sig.String(), "终止消费")
 	if read != nil {
 		if err := read.Close(); err != nil {
 			log.Fatal("关闭消费信息出错，Error：", err)

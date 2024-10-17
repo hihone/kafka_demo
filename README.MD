@@ -1,0 +1,1 @@
+- 如果提示 `Invalid cluster.id` 则需要删除 `kafka` 的 `log.dirs` 下面的日志
