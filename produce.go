@@ -23,6 +23,7 @@ func WriteMessage() error {
 			Topic:         TopicDemo,
 			Key:           []byte("name"),
 			Value:         []byte("Hihone"),
+			//Time:          time.Now().Add(10 * time.Second),
 		}, kafka.Message{
 			HighWaterMark: 0,
 			Topic:         TopicDemo,

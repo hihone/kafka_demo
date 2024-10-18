@@ -28,7 +28,7 @@ func ReadMessage(read *kafka.Reader) {
 			break
 		}
 
-		fmt.Printf("Topic: %s, Offset: %d, Key: %s, Msg: %s \n", msg.Topic, msg.Offset, msg.Key, msg.Value)
+		fmt.Printf("Topic: %s, Offset: %d, Key: %s, Msg: %s, Time: %s \n", msg.Topic, msg.Offset, msg.Key, msg.Value, msg.Time.Format("2006-01-02 15:04:05"))
 	}
 
 }
@@ -42,6 +42,6 @@ func SignalLister(read *kafka.Reader) {
 		if err := read.Close(); err != nil {
 			log.Fatal("关闭消费信息出错，Error：", err)
 		}
-		os.Exit(0)
 	}
+	os.Exit(0)
 }
