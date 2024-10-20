@@ -21,6 +21,7 @@ func readMessage() {
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest
 	config.Consumer.Offsets.AutoCommit.Enable = true
 	config.Consumer.Offsets.AutoCommit.Interval = 1 * time.Second
+	config.Consumer.Group.Rebalance.Strategy = sarama.BalanceStrategyRoundRobin
 
 	c, err := sarama.NewConsumerGroup([]string{ibm_sarama_demo.ADDR}, ibm_sarama_demo.GROUP, config)
 	if err != nil {
