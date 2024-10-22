@@ -19,6 +19,9 @@ func sendMessage() {
 	config.ClientID = "app"
 	config.Producer.Retry.Max = 3
 	config.Producer.RequiredAcks = sarama.WaitForAll
+	//config.Producer.RequiredAcks = sarama.NoResponse
+	//config.Producer.RequiredAcks = sarama.WaitForLocal
+	config.Producer.Idempotent = true // 实现幂等性 需要设置 RequiredAcks = All
 	config.Producer.Return.Successes = true
 	config.Producer.Return.Errors = true
 	config.Producer.Partitioner = sarama.NewHashPartitioner
@@ -59,7 +62,9 @@ func sendMessage() {
 func asyncSendMessage() {
 	config := sarama.NewConfig()
 	config.Producer.Retry.Max = 3
-	config.Producer.RequiredAcks = sarama.WaitForAll
+	//config.Producer.RequiredAcks = sarama.WaitForAll
+	//config.Producer.Idempotent = true // 实现幂等性 需要设置 RequiredAcks = All
+	config.Producer.RequiredAcks = sarama.WaitForLocal
 	config.Producer.Return.Successes = true
 
 	p, err := sarama.NewAsyncProducer([]string{ibm_sarama_demo.ADDR}, config)
